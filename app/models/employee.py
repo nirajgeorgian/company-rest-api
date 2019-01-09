@@ -22,6 +22,16 @@ class EmployeeModel(db.Model):
         return cls.query.filter_by(id=_id).first()
 
     @classmethod
+    def find_by_user_id(cls, _id):
+        return cls.query.filter_by(user_id=_id).first()
+
+    def json(self):
+        return {
+            "isAdmin": self.isAdmin,
+            "id": self.id
+        }
+
+    @classmethod
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()

@@ -1,9 +1,10 @@
 from flask_restful import Resource, reqparse, abort
 from sqlalchemy.exc import ArgumentError, DataError
-from flask_jwt import jwt_required
+from flask_jwt import jwt_required, current_identity
 from db import db
 
 from app.models.user import UserModel
+from app.models.admin import AdminModel
 from app.models.employee import EmployeeModel
 
 
@@ -17,6 +18,37 @@ class EmployeeController(Resource):
     parser.add_argument('isAdmin', type=bool, help='Enter isAdmin')
 
     @jwt_required()
+    def get(self):
+        user = UserModel.find_by_id(current_identity.id)
+        if not user:
+            abort(500, message="Some internal fault.")
+        admin_user = AdminModel.find_by_user_id(current_identity.id)
+        if not admin_user:
+            abort(403, message="Please use admin or ask admin to crete company.")
+        employees = EmployeeModel.query.all()
+        if not len(employees):
+            abort(500, message="Some internal fault.")
+        res = {"employees": []}
+        for employee in employees:
+            user = UserModel.find_by_id(employee.user_id)
+            employee_id = employee.id
+            isAdmin = employee.isAdmin
+            firstname = user.firstname
+            lastname = user.lastname
+            username = user.username
+            email = user.email
+            res["employees"].append({
+                "id": user.id,
+                "employee_id": employee_id,
+                "isAdmin": isAdmin,
+                "firstname": firstname,
+                "lastname": lastname,
+                "username": username,
+                "email": email
+            })
+        return res, 200
+
+    @jwt_required()
     def post(self):
         data = EmployeeController.parser.parse_args()
         username = data['username']
@@ -25,6 +57,9 @@ class EmployeeController(Resource):
             return {
                 'message': "User already exists."
             }, 400
+        admin_user = AdminModel.find_by_user_id(current_identity.id)
+        if not admin_user:
+            abort(403, message="Please use admin or ask admin to crete company.")
 
         # Create a new Employee user
         employee = EmployeeModel(isAdmin=data['isAdmin'])
