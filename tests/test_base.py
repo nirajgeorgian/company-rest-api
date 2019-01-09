@@ -39,10 +39,6 @@ class BaseTestClass(unittest.TestCase):
         Migrate(self.app, db)
         logging.disable(logging.CRITICAL)
 
-        # binds the app to current context
-        with self.app.app_context():
-            db.create_all()
-
     def tearDown(self):
         db.session.remove()
         db.drop_all()

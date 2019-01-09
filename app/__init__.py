@@ -62,6 +62,7 @@ def create_app(config_item):
     api.add_resource(EmployeeController, '/api/v1/employee')
     api.add_resource(AdminController, '/api/v1/admin')
 
+    # binds the app to current context
     with app.app_context():
         db.create_all()
 
