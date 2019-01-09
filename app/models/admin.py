@@ -8,7 +8,7 @@ class AdminModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    companies = db.relationship('CompanyModel', backref='company', lazy=True)
+    companies = db.relationship('CompanyModel', cascade="all,delete", backref='company', lazy=True)
 
     def __init__(self, **kwargs):
         super(AdminModel, self).__init__(**kwargs)

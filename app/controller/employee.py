@@ -31,21 +31,7 @@ class EmployeeController(Resource):
         res = {"employees": []}
         for employee in employees:
             user = UserModel.find_by_id(employee.user_id)
-            employee_id = employee.id
-            isAdmin = employee.isAdmin
-            firstname = user.firstname
-            lastname = user.lastname
-            username = user.username
-            email = user.email
-            res["employees"].append({
-                "id": user.id,
-                "employee_id": employee_id,
-                "isAdmin": isAdmin,
-                "firstname": firstname,
-                "lastname": lastname,
-                "username": username,
-                "email": email
-            })
+            res["employees"].append(employee.get_employee(user))
         return res, 200
 
     @jwt_required()

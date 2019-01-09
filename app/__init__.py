@@ -17,6 +17,7 @@ from app.security import authenticate, identity
 from app.models.user import UserModel
 from app.models.admin import AdminModel
 from app.controller.employee import EmployeeController
+from app.controller.single_employee import SingleEmployeeController
 from app.controller.company import CompanyController, SingleCompanyController
 from app.controller.admin import AdminController
 
@@ -75,6 +76,7 @@ def create_app():
     # Add Controllers
     api.add_resource(AdminController, '/api/v1/admin')
     api.add_resource(EmployeeController, '/api/v1/employee')
+    api.add_resource(SingleEmployeeController, '/api/v1/employee/<int:employee_id>')
     api.add_resource(CompanyController, '/api/v1/company')
     api.add_resource(SingleCompanyController, '/api/v1/company/<int:company_id>')
 

@@ -13,8 +13,8 @@ class UserModel(db.Model):
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120))
-    users_employees = db.relationship('EmployeeModel', backref='user_employee', lazy=True)
-    admin_id = db.relationship('AdminModel', backref='user_admin_id', lazy=True, uselist=False)
+    users_employees = db.relationship('EmployeeModel', cascade="all,delete", backref='user_employee', lazy=True)
+    admin_id = db.relationship('AdminModel', cascade="all,delete", backref='user_admin_id', lazy=True, uselist=False)
 
     def __init__(self, **kwargs):
         super(UserModel, self).__init__(**kwargs)
