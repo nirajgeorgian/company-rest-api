@@ -36,6 +36,7 @@ class AdminController(Resource):
             "message": "Successfully created super admin."
         }, 201
 
+    # Check for existing of superadmin
     def get(self):
         admins = AdminModel.query_for_admin()
         if admins:
@@ -47,4 +48,4 @@ class AdminController(Resource):
                     "admin": admin.json(),
                     "user": user.json()
                 }, 200
-        abort(404, message="no super admin.")
+        abort(404, message="no super admin exist.")

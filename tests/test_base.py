@@ -7,7 +7,6 @@ from flask_migrate import Migrate
 from app.models import user as User, admin as Admin, company as Company, employee as Employeen  # noqa: F401
 from db import db
 from app import create_app
-from config import app_config
 
 
 demo_data = {
@@ -23,13 +22,9 @@ auth_data = {
 }
 
 
-class TestConfig(app_config["testing"]):
-    pass
-
-
 class BaseTestClass(unittest.TestCase):
     def setUp(self):
-        self.app = create_app(TestConfig)
+        self.app = create_app("testing")
         self.app_context = self.app.app_context()
         self.app_context.push()
         self.client = self.app.test_client

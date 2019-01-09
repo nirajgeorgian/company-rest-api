@@ -15,6 +15,7 @@ from config import app_config
 from db import db
 from app.security import authenticate, identity
 from app.models.user import UserModel
+from app.models.admin import AdminModel
 from app.controller.employee import EmployeeController
 from app.controller.admin import AdminController
 
@@ -27,7 +28,7 @@ load_dotenv(dotenv_path)
 def create_app(config_item):
     app = Flask(__name__)
     """Add appropiate configuration"""
-    app.config.from_object(app_config["development"])
+    app.config.from_object(app_config[config_item])
     db.init_app(app)
     CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
     jwt = JWT(app, authenticate, identity)
@@ -37,15 +38,25 @@ def create_app(config_item):
     @jwt.authentication_handler
     def custom_jwt_authenticate(email, password):
         user = UserModel.find_by_email(email)
-        if bcrypt.check_password_hash(user.password, password):
+        if user and bcrypt.check_password_hash(user.password, password):
             return user
 
     @jwt.auth_response_handler
     def customized_jwt_response(access_token, identity):
-        return jsonify({
-            'access_token': access_token.decode('utf-8'),
-            'user_id': identity.id
-        })
+        admins = AdminModel.query_for_admin()
+        if (len(admins) > 0):
+            if admins[0].user_id == identity.id:
+                return jsonify({
+                    'access_token': access_token.decode('utf-8'),
+                    'user_id': identity.id,
+                    'isAdmin': True
+                })
+            else:
+                return jsonify({
+                    'access_token': access_token.decode('utf-8'),
+                    'user_id': identity.id,
+                    'isAdmin': False
+                })
 
     @jwt.jwt_error_handler
     def customized_jwt_error(error):
