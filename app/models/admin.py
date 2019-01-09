@@ -20,6 +20,14 @@ class AdminModel(db.Model):
     def query_for_admin(cls):
         return cls.query.all()
 
+    @classmethod
+    def find_by_id(cls, _id):
+        return cls.query.filter_by(id=_id).first()
+
+    @classmethod
+    def find_by_user_id(cls, _id):
+        return cls.query.filter_by(user_id=_id).first()
+
     def json(self):
         return {
             "admin_id": self.id

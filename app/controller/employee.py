@@ -1,4 +1,6 @@
-from flask_restful import Resource, reqparse
+from flask_restful import Resource, reqparse, abort
+from sqlalchemy.exc import ArgumentError, DataError
+from db import db
 
 from app.models.user import UserModel
 from app.models.employee import EmployeeModel
@@ -16,18 +18,27 @@ class EmployeeController(Resource):
     def post(self):
         data = EmployeeController.parser.parse_args()
         username = data['username']
-        if UserModel.find_by_username(username):
+        email = data['email']
+        if UserModel.find_by_username(username) or UserModel.find_by_email(email):
             return {
-                'message': "User already exists with this username %s".format(username)
+                'message': "User already exists."
             }, 400
 
         # Create a new Employee user
-        user = UserModel(**data)
-        employee = EmployeeModel(**data)
+        employee = EmployeeModel(isAdmin=data['isAdmin'])
+        user_data = data
+        del user_data['isAdmin']
+        user = UserModel(**user_data)
+        user = user.hash_password()
+        user.users_employees.append(employee)
 
         # save the database
-        user.save_to_db()
-        employee.save_to_db()
+        try:
+            db.session.add(user)
+            db.session.add(employee)
+            db.session.commit()
+        except (ArgumentError, DataError):
+            abort(500, message="Server internal error due to invalid argument.")
 
         return {
             "message": "Successfully created employee."

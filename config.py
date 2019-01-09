@@ -1,4 +1,5 @@
 from os import path, getenv
+from datetime import timedelta
 
 from dotenv import load_dotenv
 
@@ -21,7 +22,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_AUTH_URL_RULE = '/api/v1/login'
     JWT_AUTH_USERNAME_KEY = 'email'
-    # JWT_EXPIRATION_DELTA = timede
+    JWT_EXPIRATION_DELTA = timedelta(hours=24)
 
 
 class DevelopmentConfig(Config):

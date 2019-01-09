@@ -1,3 +1,4 @@
+from os import path, remove
 import unittest
 import json
 import logging
@@ -23,8 +24,10 @@ auth_data = {
 
 
 class BaseTestClass(unittest.TestCase):
+    db_test_path = path.join(path.dirname(__name__), 'company_test.db')
+
     def setUp(self):
-        self.app = create_app("testing")
+        self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
         self.client = self.app.test_client
@@ -38,6 +41,7 @@ class BaseTestClass(unittest.TestCase):
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
+        remove(self.db_test_path)
 
 
 def post_json(client, url, json_dict):

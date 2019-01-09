@@ -16,3 +16,20 @@ class CompanyModel(db.Model):
 
     def __repr__(self):
         return '<Company %r>' % self.name
+
+    @classmethod
+    def find_by_id(cls, _id):
+        return cls.query.filter_by(id=_id).first()
+
+    @classmethod
+    def find_by_name(cls, _name):
+        return cls.query.filter_by(name=_name).first()
+
+    @classmethod
+    def delete_by_id(cls, _id):
+        pass
+
+    @classmethod
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()

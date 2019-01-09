@@ -1,4 +1,4 @@
-from os import path
+from os import path, getenv
 import logging
 from flask import Flask, jsonify
 from flask_cors import CORS
@@ -17,18 +17,19 @@ from app.security import authenticate, identity
 from app.models.user import UserModel
 from app.models.admin import AdminModel
 from app.controller.employee import EmployeeController
-from app.controller.admin import AdminController
-
-# load dotenv in the base root
-APP_ROOT = path.join(path.dirname(__file__), '..')
-dotenv_path = path.join(APP_ROOT, '.env')
-load_dotenv(dotenv_path)
+from app.controller.company import CompanyController, SingleCompanyController
+from app.controller.admin import AdminController, AdminEmployeesController, AdminCompanyController
 
 
-def create_app(config_item):
+def create_app():
+    # load dotenv in the base root
+    APP_ROOT = path.join(path.dirname(__file__), '..')
+    dotenv_path = path.join(APP_ROOT, '.env')
+    load_dotenv(dotenv_path)
     app = Flask(__name__)
     """Add appropiate configuration"""
-    app.config.from_object(app_config[config_item])
+    config_name = getenv('APP_SETTINGS', 'development')
+    app.config.from_object(app_config[config_name])
     db.init_app(app)
     CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
     jwt = JWT(app, authenticate, identity)
@@ -49,13 +50,15 @@ def create_app(config_item):
                 return jsonify({
                     'access_token': access_token.decode('utf-8'),
                     'user_id': identity.id,
-                    'isAdmin': True
+                    'isAdmin': True,
+                    'admin_id': admins[0].id
                 })
             else:
                 return jsonify({
                     'access_token': access_token.decode('utf-8'),
                     'user_id': identity.id,
-                    'isAdmin': False
+                    'isAdmin': False,
+                    'admin_id': None
                 })
 
     @jwt.jwt_error_handler
@@ -72,6 +75,10 @@ def create_app(config_item):
     # Add Controllers
     api.add_resource(EmployeeController, '/api/v1/employee')
     api.add_resource(AdminController, '/api/v1/admin')
+    api.add_resource(AdminEmployeesController, '/api/v1/admin/employee')
+    api.add_resource(AdminCompanyController, '/api/v1/admin/company')
+    api.add_resource(CompanyController, '/api/v1/company')
+    api.add_resource(SingleCompanyController, '/api/v1/company/<int:company_id>')
 
     # binds the app to current context
     with app.app_context():
