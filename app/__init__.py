@@ -55,10 +55,14 @@ def create_app(config_item):
     logging.basicConfig()
     logging.getLogger('sqlalchemy').setLevel(logging.ERROR)
     logging.getLogger('werkzeug').setLevel(logging.ERROR)
+    logging.disable(logging.CRITICAL)
 
     api = Api(app)
     # Add Controllers
     api.add_resource(EmployeeController, '/api/v1/employee')
     api.add_resource(AdminController, '/api/v1/admin')
+
+    with app.app_context():
+        db.create_all()
 
     return app
