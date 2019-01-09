@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse, abort
 from sqlalchemy.exc import ArgumentError, DataError
+from flask_jwt import jwt_required
 from db import db
 
 from app.models.user import UserModel
@@ -15,6 +16,7 @@ class EmployeeController(Resource):
     parser.add_argument('password', type=str, help='Enter password')
     parser.add_argument('isAdmin', type=bool, help='Enter isAdmin')
 
+    @jwt_required()
     def post(self):
         data = EmployeeController.parser.parse_args()
         username = data['username']

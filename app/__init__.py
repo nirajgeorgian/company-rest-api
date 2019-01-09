@@ -18,7 +18,7 @@ from app.models.user import UserModel
 from app.models.admin import AdminModel
 from app.controller.employee import EmployeeController
 from app.controller.company import CompanyController, SingleCompanyController
-from app.controller.admin import AdminController, AdminEmployeesController, AdminCompanyController
+from app.controller.admin import AdminController
 
 
 def create_app():
@@ -73,10 +73,8 @@ def create_app():
 
     api = Api(app)
     # Add Controllers
-    api.add_resource(EmployeeController, '/api/v1/employee')
     api.add_resource(AdminController, '/api/v1/admin')
-    api.add_resource(AdminEmployeesController, '/api/v1/admin/employee')
-    api.add_resource(AdminCompanyController, '/api/v1/admin/company')
+    api.add_resource(EmployeeController, '/api/v1/employee')
     api.add_resource(CompanyController, '/api/v1/company')
     api.add_resource(SingleCompanyController, '/api/v1/company/<int:company_id>')
 
