@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 basedir = path.join(path.dirname(__file__))
 dotenv_path = path.join(basedir, '.env')
 load_dotenv(dotenv_path)
-DEFAULT_DB_URL = 'sqlite:////tmp/test.db'
+db_path = path.join(path.dirname(__name__), '../company.db')
+DEFAULT_DB_URL = "sqlite:///{}".format(db_path)
 
 
 class Config(object):
@@ -30,7 +31,7 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     """Configuration for Testing"""
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
+    DEBUG = True
     SQLALCHEMY_ECHO = False
 
 

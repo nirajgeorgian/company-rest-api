@@ -5,9 +5,12 @@ from flask_cors import CORS
 from flask_restful import Api, abort
 from flask_jwt import JWT
 from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate
 from dotenv import load_dotenv
 
 # local import\
+# import them so that they are discoverable in flask db migrate
+from app.models import user as User, admin as Admin, company as Company, employee as Employee  # noqa: F401
 from config import app_config
 from db import db
 from app.security import authenticate, identity
@@ -29,6 +32,7 @@ def create_app(config_item):
     CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
     jwt = JWT(app, authenticate, identity)
     bcrypt = Bcrypt(app)
+    Migrate(app, db)
 
     @jwt.authentication_handler
     def custom_jwt_authenticate(email, password):
