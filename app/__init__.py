@@ -18,8 +18,10 @@ from app.models.user import UserModel
 from app.models.admin import AdminModel
 from app.controller.employee import EmployeeController
 from app.controller.single_employee import SingleEmployeeController
-from app.controller.company import CompanyController, SingleCompanyController
+from app.controller.company import CompanyController
+from app.controller.single_company import SingleCompanyController
 from app.controller.admin import AdminController
+from app.controller.single_admin import SingleAdminController
 
 
 def create_app():
@@ -40,8 +42,11 @@ def create_app():
     @jwt.authentication_handler
     def custom_jwt_authenticate(email, password):
         user = UserModel.find_by_email(email)
-        if user and bcrypt.check_password_hash(user.password, password):
-            return user
+        if not user:
+            abort(401)
+        if not (user and bcrypt.check_password_hash(user.password, password)):
+            abort(401)
+        return user
 
     @jwt.auth_response_handler
     def customized_jwt_response(access_token, identity):
@@ -75,9 +80,10 @@ def create_app():
     api = Api(app)
     # Add Controllers
     api.add_resource(AdminController, '/api/v1/admin')
-    api.add_resource(EmployeeController, '/api/v1/employee')
+    api.add_resource(SingleAdminController, '/api/v1/admin/<int:admin_id>')
+    api.add_resource(EmployeeController, '/api/v1/employees')
     api.add_resource(SingleEmployeeController, '/api/v1/employee/<int:employee_id>')
-    api.add_resource(CompanyController, '/api/v1/company')
+    api.add_resource(CompanyController, '/api/v1/companies')
     api.add_resource(SingleCompanyController, '/api/v1/company/<int:company_id>')
 
     # binds the app to current context

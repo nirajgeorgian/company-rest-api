@@ -28,6 +28,21 @@ class AdminModel(db.Model):
     def find_by_user_id(cls, _id):
         return cls.query.filter_by(user_id=_id).first()
 
+    def get_admin(self, user):
+        admin_id = self.id
+        firstname = user.firstname
+        lastname = user.lastname
+        username = user.username
+        email = user.email
+        return {
+            "id": user.id,
+            "employee_id": admin_id,
+            "firstname": firstname,
+            "lastname": lastname,
+            "username": username,
+            "email": email
+        }
+
     def json(self):
         return {
             "admin_id": self.id

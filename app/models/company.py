@@ -8,6 +8,7 @@ class CompanyModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(120))
+    description = db.Column(db.String(120))
     company_employees = db.relationship('EmployeeModel', cascade="all,delete", backref='company_employee', lazy=True)
     admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
 
@@ -29,7 +30,17 @@ class CompanyModel(db.Model):
     def delete_by_id(cls, _id):
         pass
 
-    @classmethod
+    def json(self):
+        return {
+            "name": self.name,
+            "description": self.description,
+            "id": self.id
+        }
+
     def save_to_db(self):
         db.session.add(self)
+        db.session.commit()
+
+    def delete_from_db(self):
+        db.session.delete(self)
         db.session.commit()

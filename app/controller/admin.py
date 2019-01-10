@@ -44,8 +44,5 @@ class AdminController(Resource):
             user_id = admin.id
             user = UserModel.find_by_id(user_id)
             if user:
-                return {
-                    "admin": admin.json(),
-                    "user": user.json()
-                }, 200
+                return admin.get_admin(user), 200
         abort(404, message="no super admin exist.")

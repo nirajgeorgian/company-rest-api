@@ -11,6 +11,7 @@ from app import create_app
 
 
 demo_data = {
+    "id": 1,
     "firstname": "duck",
     "lastname": "dodo",
     "username": "duck",
@@ -44,10 +45,55 @@ class BaseTestClass(unittest.TestCase):
         remove(self.db_test_path)
 
 
-def post_json(client, url, json_dict):
-    return client.post(url, data=json.dumps(json_dict), content_type="application/json")
+def get_auth_token(client, auth_default_cred, headers={}):
+    headers['Content-Type'] = 'application/json'
+    headers['Accept'] = 'application/json'
+    user_login = client.post("/api/v1/login", data=json.dumps(auth_default_cred), headers=headers)
+    user_login_response = json.loads(user_login.data.decode('utf8'))
+    return "JWT {}".format(user_login_response['access_token']), user_login_response
 
 
-def json_of_response(response):
-    """Decode json from response"""
-    return json.loads(response.data.decode('utf8'))
+def post(client, url, json_dict, headers={}):
+    headers['Content-Type'] = 'application/json'
+    headers['Accept'] = 'application/json'
+    res = client.post(url, data=json.dumps(json_dict), headers=headers)
+    return res, json.loads(res.data.decode('utf8'))
+
+
+def get(client, url, headers={}):
+    headers['Content-Type'] = 'application/json'
+    headers['Accept'] = 'application/json'
+    res = client.get(url, headers=headers)
+    return res, json.loads(res.data.decode('utf8'))
+
+
+def auth_post(client, url, json_dict, auth_default_cred, token, headers={}):
+    headers['Content-Type'] = 'application/json'
+    headers['Accept'] = 'application/json'
+    headers['Authorization'] = token
+    res = client.post(url, data=json.dumps(json_dict), headers=headers)
+    return res, json.loads(res.data.decode('utf8'))
+
+
+def auth_put(client, url, json_dict, auth_default_cred, token, headers={}):
+    headers['Content-Type'] = 'application/json'
+    headers['Accept'] = 'application/json'
+    headers['Authorization'] = token
+    res = client.put(url, data=json.dumps(json_dict), headers=headers)
+    return res, json.loads(res.data.decode('utf8'))
+
+
+def auth_get(client, url, token, headers={}):
+    headers['Content-Type'] = 'application/json'
+    headers['Accept'] = 'application/json'
+    headers['Authorization'] = token
+    res = client.get(url, headers=headers)
+    return res, json.loads(res.data.decode('utf8'))
+
+
+def auth_del(client, url, token, headers={}):
+    headers['Content-Type'] = 'application/json'
+    headers['Accept'] = 'application/json'
+    headers['Authorization'] = token
+    res = client.delete(url, headers=headers)
+    return res, json.loads(res.data.decode('utf8'))
