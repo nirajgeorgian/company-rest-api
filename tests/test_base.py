@@ -56,30 +56,30 @@ def get_auth_token(client, auth_default_cred, headers={}):
 def post(client, url, json_dict, headers={}):
     headers['Content-Type'] = 'application/json'
     headers['Accept'] = 'application/json'
-    res = client.post(url, data=json.dumps(json_dict), headers=headers)
+    res = client.post("/api/v1/{}".format(url), data=json.dumps(json_dict), headers=headers)
     return res, json.loads(res.data.decode('utf8'))
 
 
 def get(client, url, headers={}):
     headers['Content-Type'] = 'application/json'
     headers['Accept'] = 'application/json'
-    res = client.get(url, headers=headers)
+    res = client.get("/api/v1/{}".format(url), headers=headers)
     return res, json.loads(res.data.decode('utf8'))
 
 
-def auth_post(client, url, json_dict, auth_default_cred, token, headers={}):
+def auth_post(client, url, json_dict, token, headers={}):
     headers['Content-Type'] = 'application/json'
     headers['Accept'] = 'application/json'
     headers['Authorization'] = token
-    res = client.post(url, data=json.dumps(json_dict), headers=headers)
+    res = client.post("/api/v1/{}".format(url), data=json.dumps(json_dict), headers=headers)
     return res, json.loads(res.data.decode('utf8'))
 
 
-def auth_put(client, url, json_dict, auth_default_cred, token, headers={}):
+def auth_put(client, url, json_dict, token, headers={}):
     headers['Content-Type'] = 'application/json'
     headers['Accept'] = 'application/json'
     headers['Authorization'] = token
-    res = client.put(url, data=json.dumps(json_dict), headers=headers)
+    res = client.put("/api/v1/{}".format(url), data=json.dumps(json_dict), headers=headers)
     return res, json.loads(res.data.decode('utf8'))
 
 
@@ -87,7 +87,7 @@ def auth_get(client, url, token, headers={}):
     headers['Content-Type'] = 'application/json'
     headers['Accept'] = 'application/json'
     headers['Authorization'] = token
-    res = client.get(url, headers=headers)
+    res = client.get("/api/v1/{}".format(url), headers=headers)
     return res, json.loads(res.data.decode('utf8'))
 
 
@@ -95,5 +95,5 @@ def auth_del(client, url, token, headers={}):
     headers['Content-Type'] = 'application/json'
     headers['Accept'] = 'application/json'
     headers['Authorization'] = token
-    res = client.delete(url, headers=headers)
+    res = client.delete("/api/v1/{}".format(url), headers=headers)
     return res, json.loads(res.data.decode('utf8'))

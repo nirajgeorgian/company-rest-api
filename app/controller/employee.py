@@ -21,14 +21,11 @@ class EmployeeController(Resource):
     def get(self):
         user = UserModel.find_by_id(current_identity.id)
         if not user:
-            abort(500, message="Some internal fault.")
-        admin_user = AdminModel.find_by_user_id(current_identity.id)
-        if not admin_user:
-            abort(403, message="Please use admin or ask admin to crete company.")
+            abort(500, message="Some internal user fault.")
         employees = EmployeeModel.query.all()
-        if not len(employees):
-            abort(500, message="Some internal fault.")
         res = {"employees": []}
+        if len(employees) == 0:
+            return res, 200
         for employee in employees:
             user = UserModel.find_by_id(employee.user_id)
             res["employees"].append(employee.get_employee(user))
@@ -39,10 +36,11 @@ class EmployeeController(Resource):
         data = EmployeeController.parser.parse_args()
         username = data['username']
         email = data['email']
-        if UserModel.find_by_username(username) or UserModel.find_by_email(email):
+        if (UserModel.find_by_username(username) or UserModel.find_by_email(email)):
             return {
                 'message': "User already exists."
             }, 400
+        # Because only admin can create employee
         admin_user = AdminModel.find_by_user_id(current_identity.id)
         if not admin_user:
             abort(403, message="Please use admin or ask admin to crete company.")
@@ -53,7 +51,8 @@ class EmployeeController(Resource):
         del user_data['isAdmin']
         user = UserModel(**user_data)
         user = user.hash_password()
-        user.users_employees.append(employee)
+        user.employee_id = employee
+        employee.user_id = user
 
         # save the database
         try:
@@ -63,6 +62,4 @@ class EmployeeController(Resource):
         except (ArgumentError, DataError):
             abort(500, message="Server internal error due to invalid argument.")
 
-        return {
-            "message": "Successfully created employee."
-        }, 201
+        return employee.get_employee(user), 201

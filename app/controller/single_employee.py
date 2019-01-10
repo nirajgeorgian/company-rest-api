@@ -19,9 +19,7 @@ class SingleEmployeeController(Resource):
         if not employee:
             abort(404, message="No Employee exists.")
         user = UserModel.find_by_id(employee.user_id)
-        return {
-            "employee": employee.get_employee(user)
-        }, 200
+        return employee.get_employee(user), 200
 
     @jwt_required()
     def put(self, employee_id):
@@ -33,16 +31,16 @@ class SingleEmployeeController(Resource):
         user.firstname = data.firstname if data.firstname else None
         user.lastname = data.lastname if data.lastname else None
         user.save_to_db()
-        return {
-            "employee": employee.get_employee(user)
-        }, 201
+        return employee.get_employee(user), 201
 
     @jwt_required()
     def delete(self, employee_id):
         employee = EmployeeModel.find_by_id(employee_id)
         if not employee:
             abort(404, message="No Employee exists.")
+        user = UserModel.find_by_id(employee.user_id)
+        if not user:
+            abort(404, message="No User exist")
         employee.delete_from_db()
-        return {
-            "message": "Successfully deleted {}".format(employee.id)
-        }, 200
+        user.delete_from_db()
+        return employee.get_employee(user), 200

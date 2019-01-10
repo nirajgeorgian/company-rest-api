@@ -33,9 +33,7 @@ class SingleCompanyController(Resource):
             abort(404, message="no company exist with the provided company_id.")
         company.description = data.description
         company.save_to_db()
-        return {
-            "company": company.json()
-        }
+        return company.json()
 
     @jwt_required()
     def delete(self, company_id):
@@ -49,6 +47,4 @@ class SingleCompanyController(Resource):
         if not company:
             abort(404, message="no company exist with the provided company_id.")
         company.delete_from_db()
-        return {
-            "message": "Successfully deleted {}".format(company.id)
-        }, 200
+        return company.json(), 200

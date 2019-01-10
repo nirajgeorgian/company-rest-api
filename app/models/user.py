@@ -13,7 +13,7 @@ class UserModel(db.Model):
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120))
-    users_employees = db.relationship('EmployeeModel', cascade="all,delete", backref='user_employee', lazy=True)
+    employee_id = db.relationship('EmployeeModel', cascade="all,delete", backref='user_employee', lazy=True, uselist=False)  # noqa E501
     admin_id = db.relationship('AdminModel', cascade="all,delete", backref='user_admin_id', lazy=True, uselist=False)
 
     def __init__(self, **kwargs):
@@ -48,4 +48,8 @@ class UserModel(db.Model):
 
     def save_to_db(self):
         db.session.add(self)
+        db.session.commit()
+
+    def delete_from_db(self):
+        db.session.delete(self)
         db.session.commit()

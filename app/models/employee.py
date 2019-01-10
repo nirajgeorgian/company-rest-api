@@ -33,7 +33,7 @@ class EmployeeModel(db.Model):
         username = user.username
         email = user.email
         return {
-            "id": user.id,
+            "user_id": user.id,
             "employee_id": employee_id,
             "isAdmin": isAdmin,
             "firstname": firstname,

@@ -20,12 +20,13 @@ class CompanyController(Resource):
         name = data['name']
         old_company = CompanyModel.find_by_name(name)
         if old_company:
-            abort(404, message="Company already exists.")
+            abort(409, message="Company already exists.")
         admin_user = AdminModel.find_by_user_id(current_identity.id)
         if not admin_user:
             abort(403, message="Please use admin or ask admin to crete company.")
         company = CompanyModel(name=data['name'], description=data['description'])
         admin_user.companies.append(company)
+        company.admin_id = admin_user
 
         # save the database
         try:
@@ -35,9 +36,7 @@ class CompanyController(Resource):
         except (ArgumentError, DataError):
             abort(500, message="Server internal error due to invalid argument.")
 
-        return {
-            "message": "Successfully created company."
-        }, 201
+        return company.json(), 201
 
     @jwt_required()
     def get(self):
