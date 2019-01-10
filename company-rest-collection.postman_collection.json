@@ -18,6 +18,9 @@
 								"exec": [
 									"pm.test(\"Response time is less than 200ms\", function () {",
 									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -65,6 +68,9 @@
 								"exec": [
 									"pm.test(\"Response time is less than 200ms\", function () {",
 									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -108,6 +114,9 @@
 								"exec": [
 									"pm.test(\"Response time is less than 200ms\", function () {",
 									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -160,6 +169,9 @@
 								"exec": [
 									"pm.test(\"Response time is less than 200ms\", function () {",
 									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -299,8 +311,11 @@
 							"script": {
 								"id": "4623048d-818e-4e5c-8156-a4ec4d96c709",
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -350,6 +365,9 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -401,6 +419,9 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -453,6 +474,9 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -478,7 +502,7 @@
 							"raw": "{\n\t\"description\": \"simple company3\"\n}"
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/v1/company/1",
+							"raw": "{{API_URL}}/api/v1/company/3",
 							"host": [
 								"{{API_URL}}"
 							],
@@ -486,7 +510,7 @@
 								"api",
 								"v1",
 								"company",
-								"1"
+								"3"
 							]
 						},
 						"description": "Update single company details."
@@ -503,6 +527,9 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -528,7 +555,7 @@
 							"raw": "{\n\t\"name\": \"company1\",\n\t\"description\": \"simple company1\"\n}"
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/v1/company/3",
+							"raw": "{{API_URL}}/api/v1/company/2",
 							"host": [
 								"{{API_URL}}"
 							],
@@ -536,7 +563,7 @@
 								"api",
 								"v1",
 								"company",
-								"3"
+								"2"
 							]
 						}
 					},
@@ -555,8 +582,11 @@
 							"script": {
 								"id": "218ac209-bb2e-4336-8fb8-f1e10513146f",
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -579,7 +609,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"user1@example.com\",\n\t\"password\": \"user1\",\n\t\"firstname\": \"user1\",\n\t\"lastname\": \"user1\",\n\t\"username\": \"user1\",\n\t\"isAdmin\": false\n}"
+							"raw": "{\n\t\"email\": \"user2@example.com\",\n\t\"password\": \"user1\",\n\t\"firstname\": \"user1\",\n\t\"lastname\": \"user1\",\n\t\"username\": \"user1\",\n\t\"isAdmin\": false\n}"
 						},
 						"url": {
 							"raw": "{{API_URL}}/api/v1/employees",
@@ -616,6 +646,9 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -677,6 +710,9 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -737,8 +773,11 @@
 							"script": {
 								"id": "70df98a0-7833-4c38-ad8c-7336eddc4c79",
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -798,6 +837,9 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -823,7 +865,7 @@
 							"raw": "{\n\t\"lastname\": \"user_update\",\n\t\"firstname\": \"user_update\"\n}"
 						},
 						"url": {
-							"raw": "{{API_URL}}/api/v1/employee/2",
+							"raw": "{{API_URL}}/api/v1/employee/1",
 							"host": [
 								"{{API_URL}}"
 							],
@@ -831,7 +873,7 @@
 								"api",
 								"v1",
 								"employee",
-								"2"
+								"1"
 							]
 						}
 					},
