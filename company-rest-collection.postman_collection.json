@@ -1,0 +1,843 @@
+{
+	"info": {
+		"_postman_id": "d475b179-2d7b-4428-9614-12b02e98e7c4",
+		"name": "company-rest-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "/admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2921151-fef3-4795-9911-0a56062acac5",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"dodo@example.com\",\n\t\"password\": \"dodo\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/admin",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin"
+							]
+						},
+						"description": "get the superuser status."
+					},
+					"response": []
+				},
+				{
+					"name": "/admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "06997e3c-8cca-49e4-865c-baae22db3b29",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"admin@example.com\",\n\t\"password\": \"admin\",\n\t\"username\": \"admin\",\n\t\"firstname\": \"admin\",\n\t\"lastname\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/admin",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/{admin_id}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2921151-fef3-4795-9911-0a56062acac5",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{JWT_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"dodo@example.com\",\n\t\"password\": \"dodo\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/admin/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/{admin_id}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2921151-fef3-4795-9911-0a56062acac5",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{JWT_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstname\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/admin/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"1"
+							]
+						},
+						"description": "Update single Admin data."
+					},
+					"response": []
+				}
+			],
+			"description": "get admin description.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7ca97ffe-5080-4db3-89d9-652e45c5209d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0be3bb6-3f0e-470a-a48e-45f320468d47",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "/login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ee394d80-9307-4610-b9b2-f43c8e6abf6a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "70df98a0-7833-4c38-ad8c-7336eddc4c79",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.environment.set(\"JWT_KEY\", jsonData.access_token);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"admin@example.com\",\n\t\"password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/login",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						},
+						"description": "login to the app."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "companies",
+			"item": [
+				{
+					"name": "/companies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4623048d-818e-4e5c-8156-a4ec4d96c709",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{JWT_KEY}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"company1\",\n\t\"description\": \"simple company1\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/companies",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies"
+							]
+						},
+						"description": "create a company by admin."
+					},
+					"response": []
+				},
+				{
+					"name": "/companies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4623048d-818e-4e5c-8156-a4ec4d96c709",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{JWT_KEY}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"company1\",\n\t\"description\": \"simple company1\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/companies",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/company/<company_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4623048d-818e-4e5c-8156-a4ec4d96c709",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{JWT_KEY}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"company1\",\n\t\"description\": \"simple company1\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/company/5",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"company",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/company/<company_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4623048d-818e-4e5c-8156-a4ec4d96c709",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{JWT_KEY}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"simple company3\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/company/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"company",
+								"1"
+							]
+						},
+						"description": "Update single company details."
+					},
+					"response": []
+				},
+				{
+					"name": "/company/<company_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4623048d-818e-4e5c-8156-a4ec4d96c709",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{JWT_KEY}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"company1\",\n\t\"description\": \"simple company1\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/company/3",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"company",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "employees",
+			"item": [
+				{
+					"name": "/employees",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "218ac209-bb2e-4336-8fb8-f1e10513146f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{JWT_KEY}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"user1@example.com\",\n\t\"password\": \"user1\",\n\t\"firstname\": \"user1\",\n\t\"lastname\": \"user1\",\n\t\"username\": \"user1\",\n\t\"isAdmin\": false\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/employees",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"employees"
+							]
+						},
+						"description": "create a super admin user."
+					},
+					"response": []
+				},
+				{
+					"name": "/employees",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ee394d80-9307-4610-b9b2-f43c8e6abf6a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "70df98a0-7833-4c38-ad8c-7336eddc4c79",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{JWT_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"lastname\": \"user_update\",\n\t\"firstname\": \"user_update\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/employees",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employee/<employee_id>",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ee394d80-9307-4610-b9b2-f43c8e6abf6a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "70df98a0-7833-4c38-ad8c-7336eddc4c79",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{JWT_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"lastname\": \"user_update\",\n\t\"firstname\": \"user_update\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/employee/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"employee",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employee/<employee_id>",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ee394d80-9307-4610-b9b2-f43c8e6abf6a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "70df98a0-7833-4c38-ad8c-7336eddc4c79",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{JWT_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"lastname\": \"user_update\",\n\t\"firstname\": \"user_update\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/employee/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"employee",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employee/<employee_id>",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ee394d80-9307-4610-b9b2-f43c8e6abf6a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "70df98a0-7833-4c38-ad8c-7336eddc4c79",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{JWT_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"lastname\": \"user_update\",\n\t\"firstname\": \"user_update\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/v1/employee/2",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"employee",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
