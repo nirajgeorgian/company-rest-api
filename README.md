@@ -10,7 +10,7 @@ source .env
 flask run
 ```
 
-> It will start one local server on [`http://localhost:3030`](http://localhost:3030)
+> It will start one local server on [`http://localhost:5000`](http://localhost:5000)
 
 ### if any error due to database or something please add migrations
 ```
