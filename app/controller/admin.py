@@ -23,7 +23,6 @@ class AdminController(Resource):
         user = user.hash_password()
         admin = AdminModel()
         user.admin_id = admin
-
         # Save to database
         try:
             db.session.add(user)

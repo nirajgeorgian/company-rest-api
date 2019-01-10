@@ -7,10 +7,16 @@ git clone https://github.com/nirajgeorgian/company-rest-api
 cd company-rest-api
 pip install -r requirements.txt
 source .env
-python run.py
+flask run
 ```
 
 > It will start one local server on [`http://localhost:3030`](http://localhost:3030)
+
+### if any error due to database or something please add migrations
+```
+flask db init
+flask db migratie
+```
 
 ## Some `Key Feature`
 - app api are preceded with '/api/v1'
