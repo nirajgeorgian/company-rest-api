@@ -8,7 +8,8 @@ basedir = path.join(path.dirname(__file__))
 dotenv_path = path.join(basedir, '.env')
 load_dotenv(dotenv_path)
 db_path = path.join(path.dirname(__name__), '../company.db')
-DEFAULT_DB_URL = "sqlite:///{}".format(db_path)
+# DEFAULT_DB_URL = "sqlite:///{}".format(db_path)
+DEFAULT_DB_URL = "postgres://fecwtidiljrtpm:ea7540c83eb3e082d1494471f360182a7874f5fc4754e46c2f96208b8337885f@ec2-54-235-77-0.compute-1.amazonaws.com:5432/darjdj8lppnhib"
 db_test_path = path.join(path.dirname(__name__), '../company_test.db')
 DEFAULT_TEST_DB_URL = "sqlite:///{}".format(db_test_path)
 
