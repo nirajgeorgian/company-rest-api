@@ -1,4 +1,3 @@
-from os import path, remove
 import unittest
 import json
 import logging
@@ -25,7 +24,6 @@ auth_data = {
 
 
 class BaseTestClass(unittest.TestCase):
-    db_test_path = path.join(path.dirname(__name__), 'company_test.db')
 
     def setUp(self):
         self.app = create_app()
@@ -42,7 +40,6 @@ class BaseTestClass(unittest.TestCase):
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
-        remove(self.db_test_path)
 
 
 def get_auth_token(client, auth_default_cred, headers={}):

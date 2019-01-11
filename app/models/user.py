@@ -35,7 +35,8 @@ class UserModel(db.Model):
         return cls.query.filter_by(id=_id).first()
 
     def hash_password(self):
-        self.password = generate_password_hash(self.password, 10)
+        password = generate_password_hash(self.password, 10)
+        self.password = password.decode("utf8", "ignore")
         return self
 
     def json(self):

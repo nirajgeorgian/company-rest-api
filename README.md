@@ -21,7 +21,10 @@ flask db migratie
 ## Some `Key Feature`
 - app api are preceded with '/api/v1'
 - every endpoint is properly unit tested using unittest
-- sqlite3 is used for development
+- postgresql is used for development
+- to change database url simple change the variable `DEFAULT_TEST_DB_URL` inside config.py appropiately
+- chnage format for database
+- `postgresql://{username}:{password}@host:port/database`
 
 ## and to run `test`
 ```
