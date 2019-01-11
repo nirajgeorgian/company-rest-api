@@ -28,8 +28,8 @@ class SingleEmployeeController(Resource):
         if not employee:
             abort(404, message="No Employee exists.")
         user = UserModel.find_by_id(employee.user_id)
-        user.firstname = data.firstname if data.firstname else None
-        user.lastname = data.lastname if data.lastname else None
+        user.firstname = data.firstname if data.firstname else user.firstname
+        user.lastname = data.lastname if data.lastname else user.lastname
         user.save_to_db()
         return employee.get_employee(user), 201
 

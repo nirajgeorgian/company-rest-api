@@ -32,7 +32,7 @@ class SingleAdminController(Resource):
         if not admin.user_id == user_id:
             abort(402, message="Only admin can updtae itself")
         user = UserModel.find_by_id(user_id)
-        user.firstname = data.firstname if data.firstname else None
-        user.lastname = data.lastname if data.lastname else None
+        user.firstname = data.firstname if data.firstname else user.firstname
+        user.lastname = data.lastname if data.lastname else user.lastname
         user.save_to_db()
         return admin.get_admin(user), 200

@@ -31,7 +31,7 @@ class SingleCompanyController(Resource):
         company = CompanyModel.find_by_id(company_id)
         if not company:
             abort(404, message="no company exist with the provided company_id.")
-        company.description = data.description
+        company.description = data.description if data.description else company.description
         company.save_to_db()
         return company.json()
 
