@@ -1,6 +1,7 @@
 # **company backend api**
 #### (written in [_flask_](http://flask.pocoo.org))
 
+## to test the app globally the app is hosted on (dododuck)[https://dododuck.herokuapp.com]. <== `heroku` app link
 ## How to `run` the app
 ```
 git clone https://github.com/nirajgeorgian/company-rest-api
@@ -37,6 +38,8 @@ and i have written postman script which after login set's up the JWT_KEY to the 
 postman also uses one environment with two variable
 ```
 API_URL=http://localhost:3030
+# for globally
+API_URL=https://dododuck.herokuapp.com
 JWT_KEY="YOUR_JWT_TOEKN"
 ```
 JWT_KEY will be automatically populated after login
