@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 
 # import them so that they are discoverable in flask db migrate
 from app.models import user as User, admin as Admin, company as Company, employee as Employeen  # noqa: F401
-from db import db
+from app.db import db
 from app import create_app
 
 
@@ -24,7 +24,6 @@ auth_data = {
 
 
 class BaseTestClass(unittest.TestCase):
-
     def setUp(self):
         self.app = create_app()
         self.app_context = self.app.app_context()

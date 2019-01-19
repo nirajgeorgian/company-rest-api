@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 # import them so that they are discoverable in flask db migrate
 from app.models import user as User, admin as Admin, company as Company, employee as Employee  # noqa: F401
 from config import app_config
-from db import db
+from app.db import db
 from app.security import authenticate, identity
 from app.models.user import UserModel
 from app.models.admin import AdminModel
@@ -86,7 +86,7 @@ def create_app():
     api.add_resource(CompanyController, '/api/v1/companies')
     api.add_resource(SingleCompanyController, '/api/v1/company/<int:company_id>')
 
-    # binds the app to current context
+    # binds the app to current context and create mpty database tables
     with app.app_context():
         db.create_all()
 

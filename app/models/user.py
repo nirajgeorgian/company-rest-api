@@ -1,5 +1,5 @@
 from flask_bcrypt import generate_password_hash
-from db import db
+from app.db import db
 
 
 class UserModel(db.Model):

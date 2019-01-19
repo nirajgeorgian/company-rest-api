@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse, abort
 from sqlalchemy.exc import ArgumentError, DataError
-from db import db
+from app.db import db
 
 from app.models.user import UserModel
 from app.models.admin import AdminModel
